@@ -1,0 +1,74 @@
+﻿<Window x:Class="IncedentsReg.View.IncidentReports"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IncedentsReg.View"
+        mc:Ignorable="d"
+        Title="IncidentReports" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <ListBox x:Name="Byuers" Margin="10"
+                     ItemsSource="{Binding IncedentsList}" 
+                      SelectedItem="{Binding SelectedIncedents}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5">
+                            <TextBlock Text="{Binding Path=registration_number}" FontSize="15" />
+                            <TextBlock Text="{Binding Path=registration_date}"  FontSize="15" />
+                            <TextBlock Text="{Binding Path=summary  }" FontSize="15" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                <Button Content="+" Width="100" Margin="10 0" Command="{Binding AddCommand}" Height="58"/>
+                <Button Content="-" Width="100" Margin="10 0" Command="{Binding RemoveCommand}"
+                        CommandParameter="{Binding SelectedIncedents}" Height="58"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" DataContext="{Binding SelectedIncedents}" Margin="0,0,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="registration_number" Margin="10,31,10,51" Grid.Row="0"
+                     Text="{Binding registration_number, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2" TextChanged="registration_number_TextChanged"/>
+            <DatePicker x:Name="registration_date" Margin="10,40,10,42" Grid.Row="1"
+                     Text="{Binding registration_date, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2"/>
+            <TextBox x:Name="summary" Margin="10,50,10,22" Grid.Row="2"
+                     Text="{Binding summary, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="3"/>
+            <TextBlock HorizontalAlignment="Left" Height="16" Margin="10,10,0,0" TextWrapping="Wrap" Text="Номер регистрации" VerticalAlignment="Top" Width="140"/>
+            <TextBlock HorizontalAlignment="Left" Height="16" Margin="10,19,0,0" TextWrapping="Wrap" Text="Дата регистрации" VerticalAlignment="Top" Width="140" Grid.Row="1"/>
+            <TextBlock HorizontalAlignment="Left" Height="16" Margin="10,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Row="2"><Run Language="ru-ru" Text="Краткая фабула"/></TextBlock>
+
+
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1" Margin="0,362,0,20">
+            <Button Content="Ok" Width="134" Command="{Binding UpdateCommand}"
+                    CommandParameter="{Binding SelectedIncedents}" Height="53" RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

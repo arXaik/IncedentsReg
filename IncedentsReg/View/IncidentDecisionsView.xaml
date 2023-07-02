@@ -1,0 +1,70 @@
+﻿<Window x:Class="Kurs.View.BuyerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kurs.View"
+        xmlns:localMy="clr-namespace:Kurs.Model"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="16"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Title="Принятое Решение" Height="451" Width="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <ListBox x:Name="Byuers" Margin="10"
+                     ItemsSource="{Binding BuyersList}" 
+                      SelectedItem="{Binding SelectedIncedents}">
+            </ListBox>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                <Button Content="+" Width="100" Margin="10 0" Command="{Binding AddCommand}"/>
+                <Button Content="-" Width="100" Margin="10 0" Command="{Binding RemoveCommand}"
+                        CommandParameter="{Binding SelectedIncedents}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" DataContext="{Binding SelectedIncedents}" Margin="0,0,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="report_id" Margin="10,31,10,51" Grid.Row="0"
+                     Text="{Binding report_id, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2"/>
+            <ComboBox x:Name="decision" Margin="10,62,10,20" Grid.Row="1"
+                     Text="{Binding decision, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2">
+                <TextBlock>Отказано</TextBlock>
+                <TextBlock>Удовлетворено</TextBlock>
+            </ComboBox>
+            <TextBlock HorizontalAlignment="Left" Height="21" Margin="10,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" Text="Регистрационный номер сообщения"/>
+            <TextBlock HorizontalAlignment="Left" Height="21" Margin="10,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" Grid.Row="1"><Run Language="ru-ru" Text="Принятое решение"/></TextBlock>
+        </Grid>
+        <Grid>
+            <Button Content="Ok" Width="134" Command="{Binding UpdateCommand}"
+                    CommandParameter="{Binding SelectedIncedents}" Height="53" RenderTransformOrigin="0.5,0.5" Margin="526,364,-260,18">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

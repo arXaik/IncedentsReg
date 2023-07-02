@@ -1,0 +1,85 @@
+﻿<Window x:Class="IncedentsReg.View.Persons"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IncedentsReg.View"
+        mc:Ignorable="d"
+        Title="Persons" Height="550" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <ListBox x:Name="Byuers" Margin="10"
+                     ItemsSource="{Binding BuyersList}" 
+                      SelectedItem="{Binding SelectedBuyer}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5">
+                            <TextBlock Text="{Binding Path=FirstName}" FontSize="15" />
+                            <TextBlock Text="{Binding Path=SecondName}"  FontSize="15" />
+                            <TextBlock Text="{Binding Path=LastName}" FontSize="15" />
+                            <TextBlock Text="{Binding Path=Passport}" FontSize="15" />
+                            <TextBlock Text="{Binding Path=Address}" FontSize="15" />
+                            <TextBlock Text="{Binding Path=DateBirth}" FontSize="15" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                <Button Content="+" Width="100" Margin="10 0" Command="{Binding AddCommand}" Height="69"/>
+                <Button Content="-" Width="100" Margin="10 0" Command="{Binding RemoveCommand}"
+                        CommandParameter="{Binding SelectedBuyer}" Height="69"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" DataContext="{Binding SelectedBuyer}" Margin="0,10,10,26">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="person_number" Margin="12" Grid.Row="0"
+                     Text="{Binding person_number, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="last_name" Margin="12" Grid.Row="1"
+                     Text="{Binding last_name, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="first_name" Margin="12" Grid.Row="2"
+                     Text="{Binding first_name, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="middle_name" Margin="12" Grid.Row="3"
+                     Text="{Binding middle_name, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="address" Margin="12" Grid.Row="4"
+                     Text="{Binding address, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="convictions" Margin="12" Grid.Row="5"
+                     Text="{Binding convictions, UpdateSourceTrigger=PropertyChanged}"/>
+
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1" Margin="0,424,0,-13">
+            <Button Content="Ok" Width="134" Command="{Binding UpdateCommand}"
+                    CommandParameter="{Binding SelectedBuyer}" Height="54" RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </StackPanel>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Height="19" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266"><Run Language="ru-ru" Text="Регистрационный номер лица"/></TextBlock>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Height="19" Margin="10,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266"><Run Language="ru-ru" Text="Фамилия"/></TextBlock>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Height="19" Margin="10,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266"><Run Language="ru-ru" Text="Имя"/><LineBreak/><Run Language="ru-ru"/></TextBlock>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Height="19" Margin="10,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266"><Run Language="ru-ru" Text="Отчество"/></TextBlock>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Height="19" Margin="10,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266"><Run Language="ru-ru" Text="Адрес"/><LineBreak/><Run Language="ru-ru"/></TextBlock>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Height="19" Margin="10,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266"><Run Language="ru-ru" Text="Количество судимостей"/><LineBreak/><Run Language="ru-ru"/><LineBreak/><Run/></TextBlock>
+    </Grid>
+</Window>
